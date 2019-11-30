@@ -3,3 +3,5 @@ Obj/
 UnityGenerated/
 Library/
 *.sln
+.vs/
+*.csproj
