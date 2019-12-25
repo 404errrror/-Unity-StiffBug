@@ -859,7 +859,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stick: {fileID: 765662878}
-  joyStickControl: 1
 --- !u!1 &662589590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,7 +1028,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stick: {fileID: 551369679}
-  joyStickControl: 0
 --- !u!114 &818825641
 MonoBehaviour:
   m_ObjectHideFlags: 0
