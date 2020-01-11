@@ -1,4 +1,4 @@
-Alias,Name,ImageName,Parent,BlockID
+KeyAlias,Name,ImageName,Parent,BlockID
 Block,블록,Editor_BlockMenu,,1
 Character,캐릭터,Editor_CharacterMenu,,2
 Interactive,상호작용,Editor_IteractiveMenu,,3

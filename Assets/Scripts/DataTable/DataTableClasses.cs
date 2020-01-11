@@ -14,7 +14,7 @@ public class EditorMenuTable : DataTableInterface<EditorMenuTable, EditorMenuTab
     }
     override protected void Init()
     {
-        Load("Alias", "EditorMenuTable");
+        Load("Local/DataTable/EditorMenuTable");
     }
 
     protected override EditorMenuProperty RowToProperty(Dictionary<string, string> row)
@@ -24,7 +24,6 @@ public class EditorMenuTable : DataTableInterface<EditorMenuTable, EditorMenuTab
         {
             switch (item.Key)
             {
-                case "Alias":       result.alias = item.Value       as string;          break;
                 case "Name":        result.name = item.Value        as string;          break;
                 case "ImageName":   result.imageName = item.Value   as string;          break;
                 case "Parent":      result.parent = item.Value      as string;          break;
