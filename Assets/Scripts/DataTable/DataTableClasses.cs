@@ -8,9 +8,10 @@ public class EditorMenuTable : DataTableInterface<EditorMenuTable, EditorMenuTab
     {
         public string alias;
         public string name;
-        public string imageName;
+        public string imagePath;
+        public string textImagePath;
         public string parent;
-        public int blockID;
+        public string customData;
     }
     override protected void Init()
     {
@@ -24,13 +25,15 @@ public class EditorMenuTable : DataTableInterface<EditorMenuTable, EditorMenuTab
         {
             switch (item.Key)
             {
-                case "Name":        result.name = item.Value        as string;          break;
-                case "ImageName":   result.imageName = item.Value   as string;          break;
-                case "Parent":      result.parent = item.Value      as string;          break;
-                case "BlockID":     int.TryParse(item.Value, out result.blockID);       break;
+                case "KeyAlias":        result.alias = item.Value           as string;          break;
+                case "Name":            result.name = item.Value            as string;          break;
+                case "ImagePath":       result.imagePath = item.Value       as string;          break;
+                case "TextImagePath":   result.textImagePath = item.Value   as string;          break;
+                case "Parent":          result.parent = item.Value          as string;          break;
+                case "CustomData":      result.customData = item.Value      as string;          break;
 
                 default:
-                    Debug.LogError("DataTableClasses.cs, EditorMenuTable, <" + item.Key + ">의 데이터 변환이 실패하였습니다!!");
+                    Debug.LogWarning("DataTableClasses.cs, EditorMenuTable, <" + item.Key + ">의 데이터 변환이 실패하였습니다!!");
                     break;
             }
         }
