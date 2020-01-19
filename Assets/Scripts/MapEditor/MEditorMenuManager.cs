@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MEditorMenuManager : MonoSingleton<MEditorMenuManager>
 {
     public GameObject parentCanvas;
-    public GameObject menuItemMover;
+    public GameObject menuItemRoot;
     public GameObject menuItemPref;
     public GameObject menuItemRowPref;
 
@@ -65,8 +65,8 @@ public class MEditorMenuManager : MonoSingleton<MEditorMenuManager>
 
         /* Generate menuItem Row Scroll View */
         GameObject itemRow = Instantiate(menuItemRowPref);
-        itemRow.transform.SetParent(menuItemMover.transform);
-        itemRow.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,100);
+        itemRow.transform.SetParent(menuItemRoot.transform);
+        itemRow.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -600);
         itemRow.transform.localScale = Vector3.one;
 
         /* Generate menuItem */
@@ -86,6 +86,12 @@ public class MEditorMenuManager : MonoSingleton<MEditorMenuManager>
         }
 
         /* Item의 시작 애니메이션 트리거 */
-        menuItemMover.GetComponent<Animator>().SetTrigger("Start");
+        menuItemRoot.GetComponent<Animator>().SetTrigger("Start");
+
+    }
+
+    public void SelectedItem(MMenuItem menuItem)
+    {
+        menuItemRoot.GetComponent<Animator>().SetTrigger("Start");
     }
 }

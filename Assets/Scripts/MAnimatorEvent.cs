@@ -9,6 +9,22 @@ public class MAnimatorEvent : MonoBehaviour
     {
         children = new List<GameObject>();
     }
+
+    public void SetTrigger(string name)
+    {
+        GetComponent<Animator>().SetTrigger(name);
+    }
+
+    public void ParentParetParentSetTrigger(string name)
+    {
+        transform.parent.parent.parent.GetComponent<Animator>().SetTrigger(name);
+    }
+
+    public void ParentSetTrigger(string name)
+    {
+        transform.parent.GetComponent<Animator>().SetTrigger(name);
+    }
+
     /* 자식의 name의 트리거를 셋팅합니다. */
     public void CildSetTrigger(string name)
     {

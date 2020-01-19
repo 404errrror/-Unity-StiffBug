@@ -31,6 +31,11 @@ public class MMenuItem : MonoBehaviour
             Debug.LogWarning("MMenuItem.cs SetImage(), <" + resourcePath + "> 에 sprite 파일이 존재하지 않습니다!!");
     }
 
+    public void ClickEvent()
+    {
+        MEditorMenuManager.Instance.SelectedItem(this);
+    }
+
     private void RefreshImage()
     {
         imageObject.sprite = imageSprite;
