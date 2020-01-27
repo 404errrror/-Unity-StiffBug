@@ -10,15 +10,15 @@ public class MEditorMenuManager : MonoSingleton<MEditorMenuManager>
     public GameObject menuItemPref;
     public GameObject menuItemRowPref;
 
-    private List<EditorMenuNode> selectedList;
-    private List<EditorMenuNode> rootNodeList;
-    private List<EditorMenuNode> nodes;
+    private List<string> selectedNodeAliasList;
+    private Dictionary<string, EditorMenuNode> nodesMap;
+    private Dictionary<string, MMenuItem> menuItemMap;
 
     void Start()
     {
-        selectedList = new List<EditorMenuNode>();
-        rootNodeList = new List<EditorMenuNode>();
-        nodes = new List<EditorMenuNode>();
+        selectedNodeAliasList = new List<string>();
+        nodesMap = new Dictionary<string, EditorMenuNode>();
+        menuItemMap = new Dictionary<string, MMenuItem>();
 
         CompileNodes();
         InitNodeObject();
@@ -27,41 +27,28 @@ public class MEditorMenuManager : MonoSingleton<MEditorMenuManager>
     void CompileNodes()
     {
         var editorMenuTable = EditorMenuTable.Instance.GetAll();
+        nodesMap.Add("Root", new EditorMenuNode("Root"));
+
         foreach (var row in editorMenuTable)
         {
             EditorMenuNode node = new EditorMenuNode(row.Key);
-            nodes.Add(node);
+            nodesMap.Add(row.Key, node);
 
             if(row.Value.parent == "")
             {
-                rootNodeList.Add(node);
+                nodesMap["Root"].ChildNodes.Add(node);
             }
             else
             {
-                // 노드의 Parent 찾기
-                for(int i = nodes.Count - 1; i >= 0; --i)
-                {
-                    if(nodes[i].Alias == row.Value.parent)
-                    {
-                        nodes[i].ChildNodes.Add(node);
-                        break;
-                    }
-
-                    // Parent 를 찾지 못했다면
-                    if(i == 0)
-                    {
-                        Debug.LogError("MEDitorMenuManager.cs ComileNode(), <" + row.Value.alias + "> 에서 Parent(" + row.Value.parent + ") 를 찾지 못했습니다!!" +
-                            "부모는 테이블 위치에서 자신보다 위에 존재해야합니다!");
-                    }
-                }
+                nodesMap[row.Value.parent].ChildNodes.Add(node);
             }
-
         }
+
+        selectedNodeAliasList.Add("Root");
     }
 
     void InitNodeObject()
     {
-        int objectCount = rootNodeList.Count;
 
         /* Generate menuItem Row Scroll View */
         GameObject itemRow = Instantiate(menuItemRowPref);
@@ -69,8 +56,8 @@ public class MEditorMenuManager : MonoSingleton<MEditorMenuManager>
         itemRow.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -600);
         itemRow.transform.localScale = Vector3.one;
 
-        /* Generate menuItem */
-        for (int i = 0; i < objectCount; ++i)
+        /* Generate Root menuItem */
+        for (int i = 0; i < nodesMap["Root"].ChildNodes.Count; ++i)
         {
             GameObject newObject = Instantiate(menuItemPref);
 
@@ -81,8 +68,10 @@ public class MEditorMenuManager : MonoSingleton<MEditorMenuManager>
             newObject.name = "MenuItem_" + i;
 
             MMenuItem menuItem = newObject.GetComponent<MMenuItem>();
-            EditorMenuTable.EditorMenuProperty menuProperty = EditorMenuTable.Instance.GetProperty(rootNodeList[i].Alias);
+            EditorMenuTable.EditorMenuProperty menuProperty = EditorMenuTable.Instance.GetProperty(nodesMap["Root"].ChildNodes[i].Alias);
             menuItem.SetImage(menuProperty.imagePath);
+            menuItem.Alias = menuProperty.alias;
+            menuItemMap.Add(menuProperty.alias, menuItem);
         }
 
         /* Item의 시작 애니메이션 트리거 */
@@ -93,5 +82,21 @@ public class MEditorMenuManager : MonoSingleton<MEditorMenuManager>
     public void SelectedItem(MMenuItem menuItem)
     {
         menuItemRoot.GetComponent<Animator>().SetTrigger("Start");
+
+        /* 같은 레벨의 MenuItem 오브젝트들을 찾고 버튼을 비활성화. */
+        if (selectedNodeAliasList.Count > 0)
+        {
+            /* 로직 : 노드의 부모를 찾아 그 자식들을 찾는다. */
+            List<EditorMenuNode> rowMenuItemAlias = nodesMap[selectedNodeAliasList[selectedNodeAliasList.Count - 1]].ChildNodes;
+            foreach (var MenuItemAlias in rowMenuItemAlias)
+            {
+                if (menuItemMap.ContainsKey(MenuItemAlias.Alias) == true)
+                {
+                    menuItemMap[MenuItemAlias.Alias].GetComponent<Button>().enabled = false;
+                }
+            }
+        }
+
+        selectedNodeAliasList.Add(menuItem.Alias);
     }
 }

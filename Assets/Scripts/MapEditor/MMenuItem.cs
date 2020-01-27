@@ -6,11 +6,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class MMenuItem : MonoBehaviour
 {
+    public Image imageObject;
+    public Image textImageObject;
+
     private Sprite imageSprite;
     private Sprite textSprite;
 
-    public Image imageObject;
-    public Image textImageObject;
+    public string Alias { get; set; }
 
     void Start()
     {
