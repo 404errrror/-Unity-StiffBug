@@ -53,15 +53,23 @@ public class MAnimatorEvent : MonoBehaviour
         }
     }
 
+    public void DestroyGameObject()
+    {
+        Destroy(gameObject);
+    }
+
     private List<GameObject> children;
     /* 일시적으로 자식을 모두 제거합니다. */
     public void RemoveChildren_Temp()
     {
-        foreach(Transform child in transform)
-        {
+        children.Clear();
+
+        foreach (Transform child in transform)
             children.Add(child.gameObject);
-            child.SetParent(transform.parent);
-        }
+
+        foreach (GameObject child in children)
+            child.transform.SetParent(transform.parent, true);
+
     }
 
     /* 일시적으로 제거했던 자식을 복구합니다. */
@@ -69,7 +77,7 @@ public class MAnimatorEvent : MonoBehaviour
     {
         foreach(GameObject child in children)
         {
-            child.transform.SetParent(transform);
+            child.transform.SetParent(transform, true);
         }
     }
 }

@@ -42,8 +42,8 @@ public class MJoyStick : MonoBehaviour
     }
 
 
-    public Vector2 GetStickPosition()
+    public Vector2 GetStickLocalPosition()
     {
-        return stick.transform.position;
+        return stick.transform.localPosition;
     }
 }

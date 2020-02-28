@@ -370,6 +370,8 @@ GameObject:
   - component: {fileID: 6251469634810540040}
   - component: {fileID: 6251469634810540047}
   - component: {fileID: 6251469634810540046}
+  - component: {fileID: 7496122465056903608}
+  - component: {fileID: 8639022764845786991}
   m_Layer: 5
   m_Name: MenuItemRow
   m_TagString: Untagged
@@ -468,6 +470,37 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!95 &7496122465056903608
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6251469634810540044}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a586bcb1ebfab6049a014646b0f40195, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8639022764845786991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6251469634810540044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0319a498f30fb4a99a6d0db922c636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6251469634930201500
 GameObject:
   m_ObjectHideFlags: 0

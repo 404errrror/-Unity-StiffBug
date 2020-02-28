@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CameraLimit.cs" />
     <Compile Include="Assets\Scripts\Control\InputProperities.cs" />
     <Compile Include="Assets\Scripts\Control\MGamePad.cs" />
     <Compile Include="Assets\Scripts\Control\MInputController.cs" />
@@ -68,14 +69,20 @@
     <Compile Include="Assets\Scripts\DataTable\DataTableClasses.cs" />
     <Compile Include="Assets\Scripts\DataTable\DataTableInterface.cs" />
     <Compile Include="Assets\Scripts\DataTable\MDataTableManager.cs" />
+    <Compile Include="Assets\Scripts\DepthMoveEffect.cs" />
     <Compile Include="Assets\Scripts\MAnimatorEvent.cs" />
     <Compile Include="Assets\Scripts\MapEditor\EditorMenuNode.cs" />
+    <Compile Include="Assets\Scripts\MapEditor\MEditorManager.cs" />
     <Compile Include="Assets\Scripts\MapEditor\MEditorMenuManager.cs" />
     <Compile Include="Assets\Scripts\MapEditor\MMenuItem.cs" />
     <Compile Include="Assets\Scripts\MCharacterController.cs" />
     <Compile Include="Assets\Scripts\MLegTrigger.cs" />
     <Compile Include="Assets\Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
+    <None Include="Assets\Graphics\Shader\TintShader.shader" />
+    <None Include="Assets\Graphics\Shader\GradientShader.shader" />
+    <None Include="Assets\Graphics\Shader\GridOverlay.shader" />
+    <None Include="Assets\Graphics\Shader\NewSurfaceShader.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/ta/Unity Projects/StiffBug/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

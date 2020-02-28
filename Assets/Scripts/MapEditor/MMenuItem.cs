@@ -21,6 +21,9 @@ public class MMenuItem : MonoBehaviour
 
     public void SetImage(string resourcePath)
     {
+        if (resourcePath == "")
+            return;
+
         imageSprite = Resources.Load<Sprite>(resourcePath);
         if (imageSprite == null)
             Debug.LogWarning("MMenuItem.cs SetImage(), <" + resourcePath + "> 에 sprite 파일이 존재하지 않습니다!!");
@@ -35,7 +38,7 @@ public class MMenuItem : MonoBehaviour
 
     public void ClickEvent()
     {
-        MEditorMenuManager.Instance.SelectedItem(this);
+        MEditorMenuManager.Instance.StartCoroutine("SelectedItem", this);
     }
 
     private void RefreshImage()

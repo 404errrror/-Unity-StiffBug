@@ -17,7 +17,7 @@ public class MInputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GamePad_Update();
+        //GamePad_Update();
         JoyStick_Update();
     }
 
@@ -59,8 +59,8 @@ public class MInputController : MonoBehaviour
 
     void JoyStick_Update()
     {
-        if(JoystickObj_L) InputProperities.Instance.SetRotationL(JoystickObj_L.GetStickPosition());
-        if(JoystickObj_R) InputProperities.Instance.SetRotationR(JoystickObj_R.GetStickPosition());
+        if(JoystickObj_L) InputProperities.Instance.SetRotationL(JoystickObj_L.GetStickLocalPosition().normalized);
+        if(JoystickObj_R) InputProperities.Instance.SetRotationR(JoystickObj_R.GetStickLocalPosition().normalized);
     }
     #endregion // TouchPad JoyStick
 }
