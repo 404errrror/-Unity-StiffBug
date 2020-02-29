@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\MLegTrigger.cs" />
     <Compile Include="Assets\Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
+    <None Include="Assets\Graphics\Shader\SpriteOutline.shader" />
     <None Include="Assets\Graphics\Shader\TintShader.shader" />
     <None Include="Assets\Graphics\Shader\GradientShader.shader" />
     <None Include="Assets\Graphics\Shader\GridOverlay.shader" />
