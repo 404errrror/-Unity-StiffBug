@@ -1,0 +1,5 @@
+﻿KeyAlias,Name,ImagePath,TextImagePath,Parent,CustomData
+Block,블록,Local/EditorMenu/BlockMenu,,,
+Character,캐릭터,,,,
+Interactive,상호작용,,,,
+Test_BlockChild,블록의 자식,Local/EditorMenu/BlockMenu,,Block,

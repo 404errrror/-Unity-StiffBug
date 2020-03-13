@@ -21,6 +21,7 @@ public class MCharacterController : MonoBehaviour
     public GameObject rightLeg;
     public MLegTrigger leftTrigger;
     public MLegTrigger rightTrigger;
+    public float FallSpeed = 1.0f;
 
     float lastRotate;
     LandState landState;
@@ -86,29 +87,28 @@ public class MCharacterController : MonoBehaviour
 
             case LandState.LandState_Left:
                 {
-                    /* Rotate Pivot Using LeftLeg */
-                    float rotation = LimitAngle(-180.0f, 0.0f, InputProperities.Instance.rotation_L);
-                    transform.parent.eulerAngles = new Vector3(0.0f, 0.0f,
-                            rotation - leftLeg.transform.localEulerAngles.z
-                            );
 
                     /* Rotate RightLeg */
-                    rotation = LimitAngle(0.0f, 180.0f, InputProperities.Instance.rotation_R);
-                    rightLeg.transform.eulerAngles = new Vector3(0.0f, 0.0f, rotation);
+                    RotateLeg_R();
 
+                    /* Rotate Pivot Using LeftLeg */
+                    float InputValue = LimitAngle(-180.0f, 0.0f, InputProperities.Instance.rotation_L);
+                    float resultRotation = InputValue - leftLeg.transform.localEulerAngles.z;               // 절대적으로 회전값이 얼마인가
+                    //float rotateValue = resultRotation - transform.parent.eulerAngles.z;                    // 상대적으로 얼마나 회전했는가
+                    transform.parent.eulerAngles = new Vector3(0.0f, 0.0f, resultRotation);
                 }
                 break;
 
             case LandState.LandState_Right:
                 {
-                    /* Rotate Pivot Using RightLeg */
-                    float rotation = LimitAngle(0.0f, 180.0f, InputProperities.Instance.rotation_R);
-                    transform.parent.eulerAngles = new Vector3(0.0f, 0.0f,
-                            rotation - rightLeg.transform.localEulerAngles.z);
-
                     /* Rotate LeftLeg */
-                    rotation = LimitAngle(-180.0f, 0.0f, InputProperities.Instance.rotation_L);
-                    leftLeg.transform.eulerAngles = new Vector3(0.0f, 0.0f, rotation);
+                    RotateLeg_L();
+
+                    /* Rotate Pivot Using RightLeg */
+                    float InputValue = LimitAngle(0.0f, 180.0f, InputProperities.Instance.rotation_R);
+                    float resultRotation = InputValue - rightLeg.transform.localEulerAngles.z;              // 절대적으로 회전값이 얼마인가
+                    //float rotateValue = resultRotation - transform.parent.eulerAngles.z;                    // 상대적으로 얼마나 회전했는가
+                    transform.parent.eulerAngles = new Vector3(0.0f, 0.0f, resultRotation);
                 }
                 break;
 
@@ -212,10 +212,29 @@ public class MCharacterController : MonoBehaviour
         face.transform.rotation = Quaternion.identity;
     }
 
-    /* 다리의 너비(사타구니?)가 회전되지 않게 고정합니다. */
+    /* 다리의 너비가 회전되지 않게 고정합니다. */
     private void LegRoateLock()
     {
         leftLeg.transform.position = (Vector2)transform.position + leftLegOriginLocPos;
         rightLeg.transform.position = (Vector2)transform.position + rightLegOriginLocPos;
+    }
+
+    /* 캐릭터의 왼쪽 다리를 회전시킵니다. */
+    private void RotateLeg_L()
+    {
+        float inputRotation = LimitAngle(-180.0f, 0.0f, InputProperities.Instance.rotation_L);
+        float rotationZ = (inputRotation - leftLeg.transform.rotation.eulerAngles.z);
+        rotationZ += 360;
+
+        leftLeg.transform.Rotate(new Vector3(0.0f, 0.0f, rotationZ));
+    }
+
+    /* 캐릭터의 오른쪽 다리를 회전시킵니다. */
+    private void RotateLeg_R()
+    {
+        float inputRotation = LimitAngle(0.0f, 180.0f, InputProperities.Instance.rotation_R);
+        float rotationZ = (inputRotation - rightLeg.transform.rotation.eulerAngles.z);
+
+        rightLeg.transform.Rotate(new Vector3(0.0f, 0.0f, rotationZ));
     }
 }
