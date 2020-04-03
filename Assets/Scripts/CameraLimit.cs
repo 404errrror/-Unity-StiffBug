@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 
 public class CameraLimit : MonoBehaviour {
+    public GameObject target;
     public float tweenSpeed = 3;
     [Serializable]
     public class MyRect
@@ -19,27 +20,27 @@ public class CameraLimit : MonoBehaviour {
     public MyRect limitRect;
     [HideInInspector] public bool isInit;
     
-    GameObject player;
     Camera myCam;
     float camWidth;
     float camHeight;
 
     public enum RectEnum { Left, Top, Right, Bottom, None };
 	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
         myCam = gameObject.GetComponent<Camera>();
         camHeight = myCam.orthographicSize * 2;
         camWidth = myCam.aspect * camHeight;
 
-        if (player == null)
-            Debug.LogError("플레이어를 찾을 수 없습니다. 플레이어 오브젝트의 Tag에 Player를 설정해주세요.");
+        if (target == null)
+            Debug.LogError("타겟을 찾을 수 없습니다. Target 프로퍼티를 설정해주세요.");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        CameraMove();
-        CameraLimit_();
-
+        if (target != null)
+        {
+            CameraMove();
+            CameraLimit_();
+        }
 	}
 
     /// <summary>
@@ -48,8 +49,8 @@ public class CameraLimit : MonoBehaviour {
     void CameraMove()
     {
         transform.position = new Vector3(
-            transform.position.x + (player.transform.position.x - transform.position.x) * Time.deltaTime * tweenSpeed,
-            transform.position.y + (player.transform.position.y - transform.position.y) * Time.deltaTime * tweenSpeed,
+            transform.position.x + (target.transform.position.x - transform.position.x) * Time.deltaTime * tweenSpeed,
+            transform.position.y + (target.transform.position.y - transform.position.y) * Time.deltaTime * tweenSpeed,
             -10);
     }
 

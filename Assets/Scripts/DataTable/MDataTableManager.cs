@@ -8,5 +8,6 @@ public class MDataTableManager : MonoSingleton<MDataTableManager>
     void Awake()
     {
         EditorMenuTable.Instance._Init();
+        TheaterTable.Instance._Init();
     }
 }

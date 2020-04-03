@@ -1,0 +1,3 @@
+﻿KeyAlias,NextTheaterAlias,StringData,TextBoxType,TheaterType,OwnerObject,FocusObject
+TheaterTest1,TheaterTest2,Test!!,SizeS,None,TestCharacter,Character_Face
+TheaterTest2,,테스트으으!,SizeS,Loop,,
