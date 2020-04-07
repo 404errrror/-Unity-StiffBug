@@ -8,37 +8,57 @@ public class MTheater : MonoBehaviour
     public GameObject focusCharacter;
     public string theaterAlias;
 
+    TextBoxSet textBoxSetInfo;
+    GameObject textBoxPref;
 
-    // Start is called before the first frame update
+    bool isOpen;
+
     void Start()
     {
         var theaterProperty = TheaterTable.Instance.GetProperty(theaterAlias);
-        GenerateTextBox(theaterProperty.textBoxType);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        textBoxSetInfo = Resources.Load<TextBoxSet>("TextBoxResources/" + theaterProperty.textBoxType);
+        textBoxPref = Resources.Load<GameObject>("Prefabs/Theater/TextBoxInterface");
+
+        isOpen = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var theaterProperty = TheaterTable.Instance.GetProperty(theaterAlias);
-        GenerateTextBox(theaterProperty.textBoxType);
+        if(isOpen == false && collision.CompareTag("Player") == true)
+            GenerateTextBox();
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (isOpen == true && collision.CompareTag("Player") == true)
+            RemoveTextBox();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void GenerateTextBox(string textType)
+    private void GenerateTextBox()
     {
-        var textBoxInfo = Resources.Load<TextBoxSet>("TextBoxResources/" + textType);
-        var textBoxPrefab = Resources.Load<GameObject>("Prefabs/Theater/TextBoxInterface");
-        var textBoxObject = Instantiate(textBoxPrefab, transform);
+        var theaterProperty = TheaterTable.Instance.GetProperty(theaterAlias);
+
+        var textBoxObject = transform.Find("TextBox");
+        if (textBoxObject == null)
+        {
+            textBoxObject = Instantiate(textBoxPref, transform).transform;
+            textBoxObject.name = "TextBox";
+        }
+
         var textBoxComp = textBoxObject.GetComponent<MTextBox>();
 
-        textBoxComp.SetTextSprites(textBoxInfo.textBoxLineSprites, textBoxInfo.textBoxColorSprites);
-        
+        textBoxComp.SetTextSprites(textBoxSetInfo.textBoxLineSprites, textBoxSetInfo.textBoxColorSprites);
+        textBoxComp.SetText(ref theaterProperty.stringData);
+
+        isOpen = true;
+    }
+
+    private void RemoveTextBox()
+    {
+        transform.Find("TextBox").GetComponent<Animator>().SetTrigger("Close");
+        isOpen = false;
     }
 }

@@ -69,7 +69,7 @@ public class TheaterTable : DataTableInterface<TheaterTable, TheaterTable.Theate
                 case "NextTheaterAlias": result.nextAlias = item.Value  as string; break;
                 case "StringData": result.stringData = item.Value       as string; break;
                 case "TextBoxType": result.textBoxType = item.Value     as string; break;
-                case "OargetObject": result.ownerObject = item.Value    as string; break;
+                case "OwnerObject": result.ownerObject = item.Value    as string; break;
                 case "FocusObject": result.focusObject = item.Value     as string; break;
                 case "TheaterType": result.theaterType = (ETheaterType)System.Enum.Parse(typeof(ETheaterType), item.Value); break;
 
