@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 public class MJoyStick : MonoBehaviour
 {
     public GameObject stick;
-
+    public bool isTouch;
     void Start()
     {
         EventTrigger eventTrigger = GetComponent<EventTrigger>();
@@ -20,12 +20,22 @@ public class MJoyStick : MonoBehaviour
         {
             EventTrigger.Entry entry = new EventTrigger.Entry();
             entry.eventID = EventTriggerType.PointerEnter;
-            entry.callback.AddListener((data) => { UpdateStickPosition(((PointerEventData)data).position); });
+            entry.callback.AddListener((data) => {
+                UpdateStickPosition(((PointerEventData)data).position);
+                isTouch = true;
+            });
             eventTrigger.triggers.Add(entry);
 
             entry = new EventTrigger.Entry();
             entry.eventID = EventTriggerType.Drag;
             entry.callback.AddListener((data) => { UpdateStickPosition(((PointerEventData)data).position); });
+            eventTrigger.triggers.Add(entry);
+
+            entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerExit;
+            entry.callback.AddListener((data) => {
+                isTouch = false;
+            });
             eventTrigger.triggers.Add(entry);
         }
         else

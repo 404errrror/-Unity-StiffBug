@@ -1,5 +1,4 @@
-﻿KeyAlias,Name,ImagePath,TextImagePath,Parent,CustomData
-Block,블록,Local/EditorMenu/BlockMenu,,,
-Character,캐릭터,,,,
-Interactive,상호작용,,,,
-Test_BlockChild,블록의 자식,Local/EditorMenu/BlockMenu,,Block,
+﻿KeyAlias,NextTheaterAlias,StringData,TextBoxType,TheaterType,OwnerObject,FocusObject
+TheaterTest1,TheaterTest2,<base>테스트으으</>,SizeS,None,TestCharacter,Test_Character_Face
+TheaterTest2,TheaterTest3,<base>테스트으으!2</>,SizeS,None,PlayerCharacter,Character_Face
+TheaterTest3,,<base>테스트으으!3</>,SizeS,Loop,TestCharacter,Test_Character_Face

@@ -12,6 +12,8 @@ public class InputProperities : Singleton<InputProperities>
     public float rotation_L { get; private set; }
     public float rotation_R { get; private set; }
 
+    public bool isControl_L { get; private set; }
+    public bool isControl_R { get; private set; }
 
     public void SetRotationL(Vector2 direction)
     {
@@ -21,6 +23,16 @@ public class InputProperities : Singleton<InputProperities>
     public void SetRotationR(Vector2 direction)
     {
         rotation_R = VectorToRotation(direction);
+    }
+
+    public void SetIsControlL(bool isControl)
+    {
+        isControl_L = isControl;
+    }
+
+    public void SetIsControlR(bool isControl)
+    {
+        isControl_R = isControl;
     }
 
     private float VectorToRotation(Vector2 vector)

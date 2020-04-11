@@ -59,12 +59,10 @@ public class MTextBox : MonoBehaviour
 
         StopCoroutine("FrameAnimation");
         StartCoroutine("FrameAnimation");
-
-        animator.SetTrigger("Open");
     }
 
     public void SetText(ref string text)
     {
-        textMesh.text = text;
+        textMesh.text = "<?lockactionbutton>" + text + "<?unlockactionbutton> ";
     }
 }

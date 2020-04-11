@@ -61,6 +61,8 @@ public class MInputController : MonoBehaviour
     {
         if(JoystickObj_L) InputProperities.Instance.SetRotationL(JoystickObj_L.GetStickLocalPosition().normalized);
         if(JoystickObj_R) InputProperities.Instance.SetRotationR(JoystickObj_R.GetStickLocalPosition().normalized);
+        InputProperities.Instance.SetIsControlL(JoystickObj_L.isTouch);
+        InputProperities.Instance.SetIsControlR(JoystickObj_R.isTouch);
     }
     #endregion // TouchPad JoyStick
 }

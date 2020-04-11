@@ -5,3 +5,4 @@ Library/
 *.sln
 .vs/
 *.csproj
+*.apk
